@@ -3,6 +3,7 @@ package br.com.zup.mercado.livre.mercadolivre.dto;
 import br.com.zup.mercado.livre.mercadolivre.model.SenhaLimpa;
 import br.com.zup.mercado.livre.mercadolivre.model.Usuario;
 import br.com.zup.mercado.livre.mercadolivre.repository.UsuarioRepository;
+import br.com.zup.mercado.livre.mercadolivre.validator.UniqueValue;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -13,6 +14,7 @@ public class UsuarioForm {
 
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Usuario.class, fieldName = "login")
     private String login;
     @NotBlank
     @Size(min = 6)
@@ -28,5 +30,9 @@ public class UsuarioForm {
 
     public Usuario converte() {
        return new Usuario(this.login, new SenhaLimpa(senha));
+    }
+
+    public String getLogin() {
+        return login;
     }
 }

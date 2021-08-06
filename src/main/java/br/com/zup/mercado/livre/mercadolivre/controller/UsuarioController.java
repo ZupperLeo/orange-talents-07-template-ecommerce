@@ -26,6 +26,6 @@ public class UsuarioController {
         Usuario usuario = form.converte();
         repository.save(usuario);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(usuario);
     }
 }
