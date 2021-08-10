@@ -1,21 +1,24 @@
-package br.com.zup.mercado.livre.mercadolivre.validator;
+package br.com.zup.mercado.livre.mercadolivre.config.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = {UniqueValueValidator.class})
+@Constraint(validatedBy = {ExistIdValidator.class})
 @Target({ FIELD })
 @Retention(RUNTIME)
-public @interface UniqueValue {
+public @interface ExistId {
 
-    String message() default "Esse campo não pode ser repetido!";
+    String message() default "Id não existe no banco de dados!";
 
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
     String fieldName();
     Class<?> domainClass();
+
 }

@@ -2,8 +2,6 @@ package br.com.zup.mercado.livre.mercadolivre.controller;
 
 import br.com.zup.mercado.livre.mercadolivre.dto.CategoriaForm;
 import br.com.zup.mercado.livre.mercadolivre.model.Categoria;
-import br.com.zup.mercado.livre.mercadolivre.repository.CategoriaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

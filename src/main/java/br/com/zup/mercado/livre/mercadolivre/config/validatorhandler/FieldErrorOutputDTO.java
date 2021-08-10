@@ -1,4 +1,4 @@
-package br.com.zup.mercado.livre.mercadolivre.validatorhandler;
+package br.com.zup.mercado.livre.mercadolivre.config.validatorhandler;
 
 public class FieldErrorOutputDTO {
 

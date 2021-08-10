@@ -17,12 +17,6 @@ public class Categoria {
     public Categoria() {
     }
 
-    /*Tive problemas ao usar o metodo findById da interface repository,
-    então implementei esse construtor apenas para o metodo toModel()*/
-    public Categoria(Long id) {
-        this.id = id;
-    }
-
     public Categoria(String nome) {
         this.nome = nome;
     }

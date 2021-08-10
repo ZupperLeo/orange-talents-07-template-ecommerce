@@ -1,4 +1,4 @@
-package br.com.zup.mercado.livre.mercadolivre.validator;
+package br.com.zup.mercado.livre.mercadolivre.config.validator;
 
 import org.springframework.util.Assert;
 

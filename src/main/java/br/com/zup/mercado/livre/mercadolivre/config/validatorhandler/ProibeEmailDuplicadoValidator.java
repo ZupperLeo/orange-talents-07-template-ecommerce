@@ -1,4 +1,4 @@
-package br.com.zup.mercado.livre.mercadolivre.validatorhandler;
+package br.com.zup.mercado.livre.mercadolivre.config.validatorhandler;
 
 import br.com.zup.mercado.livre.mercadolivre.dto.UsuarioForm;
 import br.com.zup.mercado.livre.mercadolivre.model.Usuario;

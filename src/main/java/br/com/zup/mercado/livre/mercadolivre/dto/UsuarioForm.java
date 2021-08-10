@@ -2,9 +2,7 @@ package br.com.zup.mercado.livre.mercadolivre.dto;
 
 import br.com.zup.mercado.livre.mercadolivre.model.SenhaLimpa;
 import br.com.zup.mercado.livre.mercadolivre.model.Usuario;
-import br.com.zup.mercado.livre.mercadolivre.repository.UsuarioRepository;
-import br.com.zup.mercado.livre.mercadolivre.validator.UniqueValue;
-import org.hibernate.validator.constraints.Length;
+import br.com.zup.mercado.livre.mercadolivre.config.validator.UniqueValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

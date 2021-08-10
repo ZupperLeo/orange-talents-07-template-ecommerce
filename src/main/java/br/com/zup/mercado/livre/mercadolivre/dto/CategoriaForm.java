@@ -1,15 +1,13 @@
 package br.com.zup.mercado.livre.mercadolivre.dto;
 
 import br.com.zup.mercado.livre.mercadolivre.model.Categoria;
-import br.com.zup.mercado.livre.mercadolivre.repository.CategoriaRepository;
-import br.com.zup.mercado.livre.mercadolivre.validator.ExistId;
-import br.com.zup.mercado.livre.mercadolivre.validator.UniqueValue;
+import br.com.zup.mercado.livre.mercadolivre.config.validator.ExistId;
+import br.com.zup.mercado.livre.mercadolivre.config.validator.UniqueValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
-import java.util.Optional;
 
 public class CategoriaForm {
 
