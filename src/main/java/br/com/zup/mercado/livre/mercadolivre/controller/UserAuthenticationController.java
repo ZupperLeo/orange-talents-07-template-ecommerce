@@ -32,7 +32,7 @@ public class UserAuthenticationController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<LoginInputDto> authenticate(@RequestBody LoginInputDto loginInfo) {
+	public ResponseEntity<String> authenticate(@RequestBody LoginInputDto loginInfo) {
 	
 		UsernamePasswordAuthenticationToken authenticationToken = loginInfo.build();
 
@@ -40,8 +40,7 @@ public class UserAuthenticationController {
 			Authentication authentication = authManager.authenticate(authenticationToken); 			
 			String jwt = tokenManager.generateToken(authentication);
 
-			System.out.println("TOKEN: " + jwt);//TODO retorna o token como resposta e isso não é uma boa pratica
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok().body(jwt);//TODO retornar o token por terminal ao finalizar a implementacao do sistema
 		
 		} catch (AuthenticationException e) {
 			log.error("[Autenticacao] {}",e);
