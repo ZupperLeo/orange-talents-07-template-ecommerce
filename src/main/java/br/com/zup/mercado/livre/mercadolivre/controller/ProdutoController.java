@@ -1,7 +1,10 @@
 package br.com.zup.mercado.livre.mercadolivre.controller;
 
+import br.com.zup.mercado.livre.mercadolivre.config.seguranca.UsuarioLogado;
 import br.com.zup.mercado.livre.mercadolivre.dto.ImagemForm;
+import br.com.zup.mercado.livre.mercadolivre.dto.OpiniaoForm;
 import br.com.zup.mercado.livre.mercadolivre.dto.ProdutoForm;
+import br.com.zup.mercado.livre.mercadolivre.model.Opiniao;
 import br.com.zup.mercado.livre.mercadolivre.model.Produto;
 import br.com.zup.mercado.livre.mercadolivre.model.Uploader;
 import br.com.zup.mercado.livre.mercadolivre.model.Usuario;
@@ -24,16 +27,20 @@ public class ProdutoController {
 
     @PersistenceContext
     private EntityManager manager;
+    //1
     @Autowired
     private UsuarioRepository repository;
+    //1
     @Autowired
     private Uploader uploaderSimulator;
 
     @PostMapping
     @Transactional
+    //1
     public ResponseEntity<Produto> cadastrar(@RequestBody @Valid ProdutoForm form) {
+       //1
         Usuario usuario = repository.findById(8L).get();
-
+        //1
         Produto produto = form.toModel(manager, usuario);
         manager.persist(produto);
 
@@ -57,4 +64,18 @@ public class ProdutoController {
 
         return ResponseEntity.ok().build();
     }
+
+
+    @PostMapping(value = "/{id}/opiniao")
+    @Transactional
+    public ResponseEntity<Opiniao> opinar(@RequestBody @Valid OpiniaoForm form, @PathVariable Long id,
+                                @Valid UsuarioLogado usuarioLogado){
+        Produto produto = manager.find(Produto.class, id);
+        Usuario usuario = usuarioLogado.get();
+        Opiniao opiniao = form.toModel(produto, usuario);
+        manager.persist(opiniao);
+
+        return ResponseEntity.ok().build();
+    }
+
 }

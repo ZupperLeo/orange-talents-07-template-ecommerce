@@ -36,6 +36,9 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<Imagem> imagens = new HashSet<Imagem>();
 
+    @Deprecated
+    public Produto() {}
+
     public Produto(@NotBlank String nome, @NotNull BigDecimal valor, @NotNull Integer qtde,
                    @NotNull @Valid @Size(min = 3) Collection<CaracteristicaDTO> caracteristicas,
                    @NotBlank @Length(max = 1000) String descricao, @NotNull Categoria categoria,

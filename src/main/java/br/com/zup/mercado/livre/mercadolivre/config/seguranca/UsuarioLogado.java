@@ -12,8 +12,8 @@ import java.util.List;
 
 public class UsuarioLogado implements UserDetails {
 
-    private final Usuario usuario;
-    private final User springUserDetails;
+    private Usuario usuario;
+    private User springUserDetails;
 
     public UsuarioLogado(@NotNull @Valid Usuario usuario) {
         this.usuario = usuario;
@@ -42,12 +42,12 @@ public class UsuarioLogado implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return springUserDetails.isAccountNonExpired();
+        return springUserDetails.isAccountNonLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return springUserDetails.isAccountNonExpired();
+        return springUserDetails.isCredentialsNonExpired();
     }
 
     @Override
