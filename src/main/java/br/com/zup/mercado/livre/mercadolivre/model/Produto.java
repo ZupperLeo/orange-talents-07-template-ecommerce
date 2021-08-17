@@ -1,11 +1,13 @@
 package br.com.zup.mercado.livre.mercadolivre.model;
 
 import br.com.zup.mercado.livre.mercadolivre.dto.CaracteristicaDTO;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -24,13 +26,20 @@ public class Produto {
     private @NotNull Integer qtde;
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private @NotNull Set<Caracteristica> caracteristicas = new HashSet<>();
-    private @NotBlank String descricao;
+    private @NotBlank @Length(max = 1000) String descricao;
     private @NotNull @ManyToOne Categoria categoria;
-    private LocalDateTime dataCadastro;
+    private LocalDateTime dataCadastro = LocalDateTime.now();
+    @NotNull
+    @Valid
+    @ManyToOne
+    private Usuario usuario;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<Imagem> imagens = new HashSet<Imagem>();
 
     public Produto(@NotBlank String nome, @NotNull BigDecimal valor, @NotNull Integer qtde,
-                   @NotNull @Valid Collection<CaracteristicaDTO> caracteristicas, @NotBlank String descricao,
-                   @NotNull Categoria categoria) {
+                   @NotNull @Valid @Size(min = 3) Collection<CaracteristicaDTO> caracteristicas,
+                   @NotBlank @Length(max = 1000) String descricao, @NotNull Categoria categoria,
+                   @NotNull @Valid Usuario usuario) {
         this.nome = nome;
         this.valor = valor;
         this.qtde = qtde;
@@ -39,6 +48,7 @@ public class Produto {
         this.caracteristicas.addAll(caracteristicas.stream()
                         .map(caracteristica -> caracteristica.toModel(this))
                         .collect(Collectors.toSet()));
+        this.usuario = usuario;
     }
 
 
@@ -65,5 +75,36 @@ public class Produto {
         } else if (!nome.equals(other.nome))
             return false;
         return true;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Integer getQtde() {
+        return qtde;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public boolean pertenceAoUsuario(Usuario possivelUsuario) {
+        return this.usuario.equals(possivelUsuario);
+    }
+
+    public boolean naoPerteenceAoUsuario(Usuario usario) {
+        return this.usuario.equals(usuario);
+    }
+
+    public void associaImagens(Set<String> links) {
+        Set<Imagem> imagens = links.stream()
+                .map(link -> new Imagem(this, link))
+                .collect(Collectors.toSet());
+        this.imagens.addAll(imagens);
     }
 }

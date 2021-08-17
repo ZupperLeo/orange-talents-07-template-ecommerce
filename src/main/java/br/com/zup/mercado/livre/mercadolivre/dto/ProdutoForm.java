@@ -3,6 +3,7 @@ package br.com.zup.mercado.livre.mercadolivre.dto;
 import br.com.zup.mercado.livre.mercadolivre.config.validator.MinimumValue;
 import br.com.zup.mercado.livre.mercadolivre.model.Categoria;
 import br.com.zup.mercado.livre.mercadolivre.model.Produto;
+import br.com.zup.mercado.livre.mercadolivre.model.Usuario;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.EntityManager;
@@ -45,7 +46,6 @@ public class ProdutoForm {
         this.caracteristicas.addAll(caracteristicas);
         this.descricao = descricao;
         this.categoriaId = categoriaId;
-        this.dataCadastro = LocalDateTime.now();;
     }
 
     public String getNome() {
@@ -80,8 +80,8 @@ public class ProdutoForm {
         return dataCadastro;
     }
 
-    public Produto toModel(EntityManager manager) {
+    public Produto toModel(EntityManager manager, Usuario usuario) {
         Categoria categoria = manager.find(Categoria.class, categoriaId);
-        return new Produto(nome, valor, qtde, caracteristicas, descricao, categoria);
+        return new Produto(nome, valor, qtde, caracteristicas, descricao, categoria, usuario);
     }
 }

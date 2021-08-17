@@ -17,11 +17,11 @@ public class UsuarioLogado implements UserDetails {
 
     public UsuarioLogado(@NotNull @Valid Usuario usuario) {
         this.usuario = usuario;
-        this.springUserDetails = new User(usuario.getUsername(), usuario.getPassword(), List.of());
+        this.springUserDetails = new User(usuario.getLogin(), usuario.getSenha(), List.of());
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         return springUserDetails.getAuthorities();
     }
 
