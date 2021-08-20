@@ -23,24 +23,19 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/produtos")
-public class ProdutoController {
+public class ProdutosController {
 
     @PersistenceContext
     private EntityManager manager;
-    //1
     @Autowired
     private UsuarioRepository repository;
-    //1
     @Autowired
     private Uploader uploaderSimulator;
 
     @PostMapping
     @Transactional
-    //1
     public ResponseEntity<Produto> cadastrar(@RequestBody @Valid ProdutoForm form) {
-       //1
         Usuario usuario = repository.findById(8L).get();
-        //1
         Produto produto = form.toModel(manager, usuario);
         manager.persist(produto);
 
