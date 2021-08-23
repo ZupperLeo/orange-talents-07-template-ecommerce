@@ -2,6 +2,7 @@ package br.com.zup.mercado.livre.mercadolivre.model;
 
 import br.com.zup.mercado.livre.mercadolivre.dto.CaracteristicaDTO;
 import br.com.zup.mercado.livre.mercadolivre.dto.Opinioes;
+import io.jsonwebtoken.lang.Assert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -59,6 +60,23 @@ public class Produto {
         this.usuario = usuario;
     }
 
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                ", qtde=" + qtde +
+                ", caracteristicas=" + caracteristicas +
+                ", descricao='" + descricao + '\'' +
+                ", categoria=" + categoria +
+                ", dataCadastro=" + dataCadastro +
+                ", usuario=" + usuario +
+                ", imagens=" + imagens +
+                ", perguntas=" + perguntas +
+                ", opinioes=" + opinioes +
+                '}';
+    }
 
     @Override
     public int hashCode() {
@@ -145,4 +163,14 @@ public class Produto {
                 .collect(Collectors.toCollection(TreeSet :: new));
     }
 
+    public boolean verificaEstoque(Integer qtde) {
+        Assert.isTrue(qtde > 0, "Quantidade deve ser maior que zero");
+
+        if(qtde <= this.qtde) {
+            this.qtde -= qtde;
+            return true;
+        }
+
+        return false;
+    }
 }
