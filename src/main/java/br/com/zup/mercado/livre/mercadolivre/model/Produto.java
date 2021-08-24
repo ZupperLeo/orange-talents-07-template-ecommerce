@@ -127,8 +127,8 @@ public class Produto {
         return perguntas;
     }
 
-    public boolean pertenceAoUsuario(Usuario possivelUsuario) {
-        return this.usuario.equals(possivelUsuario);
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public boolean naoPerteenceAoUsuario(Usuario usario) {
